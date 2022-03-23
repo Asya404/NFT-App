@@ -20,13 +20,13 @@
         <form id="search-events" class="card card-body">
             <div class="form-group">
                 <label for="event-name">Search by Name or City</label>
-                <input type="text" id="event-name" class="form-control" placeholder="Search By Name or City">
+                <input type="text" id="event-name" placeholder="Search By Name or City">
             </div>
-
             <div class="form-group">
                 <label for="category">Category</label>
-                <select class="form-control" id="category"></select>
+                <select id="category"></select>
             </div>
+            <div class="messages"></div>
             <input type="submit" class="btn" id="submitBtn" value="Search">
         </form>
         <div id="result"></div>
@@ -38,11 +38,6 @@
 
     <script src="js/classes.js"></script>
     <script src="js/app.js"></script>
-    <style>
-        footer {
-            color: white;
-        }
-    </style>
 </body>
 
 </html>
