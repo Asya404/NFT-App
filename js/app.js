@@ -6,16 +6,20 @@ btn.addEventListener('click', (e) => {
     e.preventDefault();
 
     // read the values
-    const eventName = document.querySelector('#event-name').value;
-    const category = document.querySelector('#category').value;
+    const nftSelect = document.querySelector('#category');
+    const address = nftSelect.options[nftSelect.selectedIndex].getAttribute('data-contract');
+    const nftId = document.querySelector('#category').value;
+    const eventName = document.querySelector('#event-name');
 
-    // validating and print the result or error
+    // first validate and if its empty => error
+    // if not, requestAPI by chosen values, then display result
     if (eventName !== '') {
-        // cryptoapi.requestAPI(currencySelect, cryptoSelect)
-        //     .then(data => {
-        //         data = data.data;
-        //         cryptoapi.displayResult(data, currencySelect);
-        //     })
+        eventbrite.requestAPI(nftId, address)
+            .then(data => {
+                data = data.data;
+                console.log(data);
+                eventbrite.displayResult(data);
+            })
     } else {
         eventbrite.printMessage('Add an Event or City', 'error');
     }

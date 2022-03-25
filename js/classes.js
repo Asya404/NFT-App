@@ -1,15 +1,24 @@
 class EventBrite {
 
-    // to use it right now
+    // to use it right now (properties of the object)
     constructor() {
-        this.auth_token = 'NJWHOQLOPMVRIWASRYGU';
-        this.printCrypto();
+        this.printNFT();
     }
 
 
     // Here we get data with all the crypto, then build the options
     async getCategories() {
-        const response = await fetch(`https://www.eventbriteapi.com/v3/categories/?token=${this.auth_token}`)
+        const response = await fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&limit=70&include_orders=false`)
+        const data = await response.json();
+        return {
+            data
+        }
+    }
+
+
+    // Here we requestAPI by chosen values
+    async requestAPI(nftId, address) {
+        const response = await fetch(`https://api.opensea.io/api/v1/asset/${address}/${nftId}/`);
         const data = await response.json();
         return {
             data
@@ -18,18 +27,18 @@ class EventBrite {
 
 
     // Build the options in select
-    printCrypto() {
+    printNFT() {
         this.getCategories()
             .then(data => {
-                const categoriesList = data.data.categories;
+                const nftList = data.data.assets;
                 const categoriesSelect = document.querySelector('#category');
-                categoriesList.forEach(category => {
+                nftList.forEach(nft => {
                     const option = document.createElement('option');
-                    option.value = category.id;
-                    option.textContent = category.name; 
+                    option.value = nft.token_id;
+                    option.dataset.contract = nft.asset_contract.address;
+                    option.textContent = nft.name;
                     categoriesSelect.appendChild(option);
                 })
-                console.log(categoriesList);
             })
             .catch(error => console.log(error));
     }
@@ -48,4 +57,27 @@ class EventBrite {
             document.querySelector('.messages div').remove();
         }, 2000)
     }
+
+
+    // Prints the result of the valuation
+    displayResult(data) {
+        let output = '';
+        output = `
+            <div class="card">
+                <div class="card-content">
+                    <div class="card__img"><img src="${data.image_url}"></div>
+                    <div class="card__text">
+                        <div class="card__detail"><p>${data.collection.name}</p></div>
+                        <div class="card__detail"><p><span class="card__detail--span">Name:</span> ${(data.name)}</p></div>
+                        <div class="card__detail"><p><span class="card__detail--span">Owned by</span> ${(data.name)}</p></div>
+                        <div class="card__detail"><p><span class="card__detail--span">Price:</span> ${data.collection.payment_tokens[0].usd_price}$</p></div>
+                        <div class="card__detail"><p>${data.description}</p></div>
+                    </div>
+                </div>    
+            </div>
+        `;
+        const divResult = document.querySelector('#result');
+        divResult.innerHTML = output;
+    }
+
 }
