@@ -8,7 +8,7 @@ class EventBrite {
 
     // Here we get data with all the crypto, then build the options
     async getCategories() {
-        const response = await fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&limit=70&include_orders=false`)
+        const response = await fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&limit=100&include_orders=false`)
         const data = await response.json();
         return {
             data
@@ -36,7 +36,14 @@ class EventBrite {
                     const option = document.createElement('option');
                     option.value = nft.token_id;
                     option.dataset.contract = nft.asset_contract.address;
-                    option.textContent = nft.name;
+
+                    if(nft.name == null) {
+                        option.textContent = nft.asset_contract.name;
+                    } else {
+                        option.textContent = nft.name;
+                        console.log(option.textContent)
+                    }
+                   
                     categoriesSelect.appendChild(option);
                 })
             })
@@ -71,7 +78,7 @@ class EventBrite {
                         <div class="card__detail"><p><span class="card__detail--span">Name:</span> ${(data.name)}</p></div>
                         <div class="card__detail"><p><span class="card__detail--span">Owned by</span> ${(data.name)}</p></div>
                         <div class="card__detail"><p><span class="card__detail--span">Price:</span> ${data.collection.payment_tokens[0].usd_price}$</p></div>
-                        <div class="card__detail"><p>${data.description}</p></div>
+                        <div class="card__detail"><p>${data.description !== null ? data.description.substring(0, 300) : ''} ...</p></div>
                     </div>
                 </div>    
             </div>
