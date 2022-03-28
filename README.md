@@ -1,3 +1,3 @@
-# Events-App
-App that helps find events in chosen city or by category<br />
+# NFT-App
+App that generates NFTs and detailed information<br />
 https://asya404.github.io/Events-App/
