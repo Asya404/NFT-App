@@ -36,8 +36,6 @@ header {
 }
 
 .navbar {
-    margin: 0;
-    padding: 0;
     background-color: #4B4745;
     padding: 15px;
 }
@@ -92,7 +90,6 @@ label {
     border: 1px solid #13CA91;
     border-radius: 5px;
     text-transform: uppercase;
-    margin-top: 25px;
 }
 
 .btn:hover {
@@ -131,7 +128,6 @@ footer {
     width: 48%;
     border: 1px solid #13CA91;
     border-radius: 10px;
-    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
