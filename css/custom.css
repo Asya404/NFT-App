@@ -125,6 +125,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .card__img img {
@@ -148,7 +149,7 @@ footer {
     margin: 20px 0;
 }
 
-@media screen and(min-width:768px) {
+@media only screen and (min-width:768px) {
     .card-content {
         display: flex;
         justify-content: space-between;
@@ -156,6 +157,7 @@ footer {
     
     .card__img {
         width: 48%;
+        margin-bottom: 0;
     }
     
     .card__text {
