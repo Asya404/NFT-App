@@ -13,6 +13,7 @@ body {
     margin: 0 auto;
     width: 100%;
     max-width: 900px;
+    padding: 0 10px;
 }
 
 .content {
@@ -116,16 +117,9 @@ footer {
 
 .card-content {
     color: #fff;
-    display: flex;
-    justify-content: space-between;
-}
-
-.card__text {
-    width: 48%;
 }
 
 .card__img {
-    width: 48%;
     border: 1px solid #13CA91;
     border-radius: 10px;
     display: flex;
@@ -152,4 +146,19 @@ footer {
 
 footer {
     margin: 20px 0;
+}
+
+@media screen and(min-width:768px) {
+    .card-content {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .card__img {
+        width: 48%;
+    }
+    
+    .card__text {
+        width: 48%;
+    }
 }
